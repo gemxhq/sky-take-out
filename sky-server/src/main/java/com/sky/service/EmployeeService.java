@@ -33,4 +33,17 @@ public interface EmployeeService {
      * @return
      */
     PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+    /**
+     * 员工信息修改
+     * @param employeeDTO
+     */
+    void change(EmployeeDTO employeeDTO);
+
+    /**
+     * 根据id查询员工信息
+     * @param id
+     * @return
+     */
+    Employee getById(Long id);
 }
