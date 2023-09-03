@@ -31,6 +31,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeMapper employeeMapper;
 
     /**
+     * 员工状态更改
+     * @param status
+     */
+    @Override
+    public void statusChange(Integer status, Long id) {
+        // TODO 管理员才可以对员工状态进行更改
+        Employee employee = new Employee();
+        employee.setStatus(status);
+        employee.setId(id);
+
+        employeeMapper.update(employee);
+    }
+
+    /**
      * 员工登录
      *
      * @param employeeLoginDTO

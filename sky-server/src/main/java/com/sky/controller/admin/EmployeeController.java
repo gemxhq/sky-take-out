@@ -93,4 +93,11 @@ public class EmployeeController {
         // 封装成Result
         return Result.success(pageResult);
     }
+
+    @PostMapping("/status/{status}")
+    @ApiOperation("员工状态更改")
+    public Result statusChange(@PathVariable Integer status, Long id) {
+        employeeService.statusChange(status, id);
+        return Result.success();
+    }
 }

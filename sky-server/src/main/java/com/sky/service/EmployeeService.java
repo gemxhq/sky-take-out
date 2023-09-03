@@ -9,6 +9,12 @@ import com.sky.result.PageResult;
 public interface EmployeeService {
 
     /**
+     * 员工状态更该
+     * @param status
+     */
+    void statusChange(Integer status, Long id);
+
+    /**
      * 员工登录
      * @param employeeLoginDTO
      * @return
