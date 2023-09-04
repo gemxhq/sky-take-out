@@ -20,7 +20,7 @@ public class AliOssUtil {
     private String bucketName;
 
     /**
-     * 文件上传
+     * 文件上传，并返回上传后图片在的阿里云服务器的地址
      *
      * @param bytes
      * @param objectName

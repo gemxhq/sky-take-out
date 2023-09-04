@@ -6,3 +6,8 @@ sky:
     database: selflearningonline
     username: root
     password: G.E.M0816
+  alioss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    access-key-id: LTAI5tNUAzR62gSz11ERNUXn
+    access-key-secret: ASad0UBQTOcEbQEKHtBjRjzjyxQ5ME
+    bucket-name: gemxhq-bucket
