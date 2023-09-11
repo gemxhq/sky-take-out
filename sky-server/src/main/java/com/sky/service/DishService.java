@@ -29,7 +29,7 @@ public interface DishService {
     void update(DishDTO dishDTO);
 
     /**
-     * 获取dishVO
+     * 获取dishVO 查询菜品及口味
      * @param id
      */
     DishVO getVOById(Long id);
@@ -40,4 +40,12 @@ public interface DishService {
      * @param status
      */
     void statusChange(Long id, Integer status);
+
+    /**
+     * 根据分类id查询对应的菜品集合
+     * @param categoryId
+     * @return
+     */
+    List<DishVO> listWithFlavor(Long categoryId);
+
 }

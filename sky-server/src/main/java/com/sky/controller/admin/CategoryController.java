@@ -60,8 +60,8 @@ public class CategoryController {
     @ApiOperation("分类分页查询")
     public Result<PageResult> pageQuery(CategoryPageQueryDTO categoryPageQueryDTO) {
         log.info("分类分页查询：{}", categoryPageQueryDTO);
-        PageResult pageResult = categoryService.pageQuery(categoryPageQueryDTO);
-        return Result.success(pageResult);
+        PageResult page = categoryService.pageQuery(categoryPageQueryDTO);
+        return Result.success(page);
     }
 
     @PostMapping("/status/{status}")

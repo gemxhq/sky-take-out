@@ -42,6 +42,7 @@ public class HttpClientUtil {
         CloseableHttpResponse response = null;
 
         try {
+            // url带参
             URIBuilder builder = new URIBuilder(url);
             if (paramMap != null) {
                 for (String key : paramMap.keySet()) {

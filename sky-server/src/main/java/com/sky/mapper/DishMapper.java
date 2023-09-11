@@ -52,4 +52,6 @@ public interface DishMapper {
     Dish getVOById(Long id);
 
     void statusChange(Long id, Integer status);
+
+    List<Dish> list(Dish dish);
 }

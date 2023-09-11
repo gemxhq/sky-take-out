@@ -141,6 +141,11 @@ public class DishServiceImpl implements DishService {
 
     }
 
+    /**
+     * 查询菜品及口味
+     * @param id
+     * @return
+     */
     @Override
     @Transactional
     public DishVO getVOById(Long id) {
@@ -160,5 +165,35 @@ public class DishServiceImpl implements DishService {
     @Override
     public void statusChange(Long id, Integer status) {
         dishMapper.statusChange(id, status);
+    }
+
+    /**
+     * 根据分类id查询对应的菜品集合
+     * @param categoryId
+     * @return
+     */
+    @Override
+    @Transactional
+    public List<DishVO> listWithFlavor(Long categoryId) {
+        // 获取菜品集合
+        Dish dish = new Dish(); // 构造查询参数
+        dish.setCategoryId(categoryId);
+        dish.setStatus(StatusConstant.ENABLE);
+
+        List<Dish> dishList = dishMapper.list(dish);
+
+        // 遍历菜品，获取口味并绑定，返回VO
+        List<DishVO> dishVOList = new ArrayList<>();
+        for (Dish tmp : dishList) {
+            DishVO dishVO = new DishVO();
+            BeanUtils.copyProperties(tmp, dishVO);
+
+            List<DishFlavor> flavor = dishFlavorMapper.getFlavor(tmp.getId());
+            dishVO.setFlavors(flavor);
+            // 一定不要忘记
+            dishVOList.add(dishVO);
+        }
+
+        return dishVOList;
     }
 }
