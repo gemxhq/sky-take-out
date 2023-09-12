@@ -32,7 +32,7 @@ public interface DishMapper {
     /**
      * 菜品分页查询
      */
-    Page pageQuery(DishPageQueryDTO dishPageQueryDTO);
+    Page<Dish> pageQuery(DishPageQueryDTO dishPageQueryDTO);
 
     /**
      * 删除菜品
@@ -46,11 +46,12 @@ public interface DishMapper {
      */
     Dish getById(Long id);
 
-
+    @AutoFill(OperationType.UPDATE)
     void update(Dish dish);
 
-    Dish getVOById(Long id);
+//    Dish getVOById(Long id);
 
+    @AutoFill(OperationType.UPDATE)
     void statusChange(Long id, Integer status);
 
     List<Dish> list(Dish dish);

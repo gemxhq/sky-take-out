@@ -9,22 +9,22 @@
                                              #{updateUser})
     </insert>
 
-    <resultMap id="dishPage" type="DishVO">
-        <id column="id" property="id"></id>
-        <result column="name" property="name"></result>
-        <result column="price" property="price"></result>
-        <result column="image" property="image"></result>
-        <result column="description" property="description"></result>
-        <result column="status" property="status"></result>
-        <result column="updateTime" property="updateTime"></result>
-        <result column="category_name" property="categoryName"></result>
-    </resultMap>
-    <select id="pageQuery" parameterType="DishPageQueryDTO" resultMap="dishPage">
-        select dish.*,category.name category_name from dish LEFT JOIN category ON dish.category_id=category.id
+<!--    <resultMap id="dishPage" type="DishVO">-->
+<!--        <id column="id" property="id"></id>-->
+<!--        <result column="name" property="name"></result>-->
+<!--        <result column="price" property="price"></result>-->
+<!--        <result column="image" property="image"></result>-->
+<!--        <result column="description" property="description"></result>-->
+<!--        <result column="status" property="status"></result>-->
+<!--        <result column="updateTime" property="updateTime"></result>-->
+<!--        <result column="category_name" property="categoryName"></result>-->
+<!--    </resultMap>-->
+    <select id="pageQuery" parameterType="DishPageQueryDTO" resultType="Dish">
+        select * from dish
         <where>
-            <if test="name != null">and dish.name like concat('%',#{name},'%')</if>
+            <if test="name != null">and name like concat('%',#{name},'%')</if>
             <if test="categoryId != null">and category_id=#{categoryId}</if>
-            <if test="status != null">and status=#{dish.status}</if>
+            <if test="status != null">and status=#{status}</if>
         </where>
     </select>
 
@@ -51,6 +51,8 @@
             <if test="image != null">image=#{image},</if>
             <if test="description != null">description=#{description},</if>
             <if test="status != null">status=#{status},</if>
+            <if test="updateTime != null">update_time=#{updateTime},</if>
+            <if test="updateUser != null">update_user=#{updateUser},</if>
         </set>
         where id=#{id}
     </update>

@@ -66,7 +66,7 @@ public class DishServiceImpl implements DishService {
     @Override
     public Page pageQuery(DishPageQueryDTO dishPageQueryDTO) {
         PageHelper.startPage(dishPageQueryDTO.getPage(), dishPageQueryDTO.getPageSize());
-        Page page = dishMapper.pageQuery(dishPageQueryDTO);
+        Page<Dish> page = dishMapper.pageQuery(dishPageQueryDTO);
 
         return page;
     }
@@ -114,7 +114,6 @@ public class DishServiceImpl implements DishService {
      */
     @Override
     @Transactional
-    @AutoFill(OperationType.UPDATE)
     public void update(DishDTO dishDTO) {
         Dish dish = new Dish();
         BeanUtils.copyProperties(dishDTO, dish);
@@ -164,6 +163,7 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public void statusChange(Long id, Integer status) {
+        // todo 菜品包含在套餐中，不允许改为0
         dishMapper.statusChange(id, status);
     }
 
@@ -195,5 +195,16 @@ public class DishServiceImpl implements DishService {
         }
 
         return dishVOList;
+    }
+
+    /**
+     * 查询符合dish条件的所有菜品
+     * @param dish 根据里面set非空的条件进行查询
+     * @return
+     */
+    @Override
+    public List<Dish> list(Dish dish) {
+        List<Dish> list = dishMapper.list(dish);
+        return list;
     }
 }

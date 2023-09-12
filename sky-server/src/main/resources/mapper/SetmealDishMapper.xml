@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sky.mapper.SetmealDishMapper">
+    <insert id="insertBatch">
+        insert into setmeal_dish (setmeal_id,dish_id,name,price,copies) values
+        <foreach collection="setmealDishes" item="sd" separator=",">
+            (#{sd.setmealId},#{sd.dishId},#{sd.name},#{sd.price},#{sd.copies})
+        </foreach>
+    </insert>
+    <update id="updateOne">
+        update setmeal_dish
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="copies != null">copies=#{copies},</if>
+            <if test="price != null">price=#{price},</if>
+            <if test="setmealId != null">setmeal_id=#{setmealId},</if>
+        </set>
+        where dish_id=#{dishId}
+    </update>
+
+    <!--    <update id="update">-->
+<!--        <foreach collection="list" item="sd">-->
+<!--            update setmeal_dish-->
+<!--            <set>-->
+<!--                <if test="sd.copies != null">copies=#{sd.copies},</if>-->
+<!--                <if test="sd.name != null">name=#{sd.name},</if>-->
+<!--                <if test="sd.price != null">price=#{sd.price},</if>-->
+<!--                <if test="sd.setmealId != null">setmeal_id=#{sd.setmealId}</if>-->
+<!--            </set>-->
+<!--            where dish_id=#{sd.dishId}-->
+<!--        </foreach>-->
+<!--    </update>-->
+
+
+    <delete id="deleteBatch">
+        delete from setmeal_dish
+        where setmeal_id in
+        <foreach collection="ids" item="id" open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+
+</mapper>

@@ -43,7 +43,7 @@ public class DishController {
 
     @GetMapping("/page")
     @ApiOperation("菜品分页查询")
-    public Result pageQuery(DishPageQueryDTO dishPageQueryDTO) {
+    public Result<PageResult> pageQuery(DishPageQueryDTO dishPageQueryDTO) {
         log.info("菜品分页查询：{}", dishPageQueryDTO);
         Page page = dishService.pageQuery(dishPageQueryDTO);
 
@@ -84,6 +84,16 @@ public class DishController {
     }
 
 
+    @GetMapping("/list")
+    @ApiOperation("根据分类id查询所有菜品")
+    public Result<List<Dish>> list(Long categoryId) {
+        log.info("查询分类{}下所有菜品：{}", categoryId);
+        Dish dish = Dish.builder()
+                        .categoryId(categoryId).build();
+
+        List<Dish> dishList = dishService.list(dish);
+        return Result.success(dishList);
+    }
 
 
 }

@@ -48,4 +48,10 @@ public interface DishService {
      */
     List<DishVO> listWithFlavor(Long categoryId);
 
+    /**
+     * 查询符合dish条件的所有菜品
+     * @param dish 根据里面set非空的条件进行查询
+     * @return
+     */
+    List<Dish> list(Dish dish);
 }
