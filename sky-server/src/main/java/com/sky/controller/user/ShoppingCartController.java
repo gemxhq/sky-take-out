@@ -36,4 +36,20 @@ public class ShoppingCartController {
         List<ShoppingCart> list= shoppingCartService.list();
         return Result.success(list);
     }
+
+    @ApiOperation("清空购物车")
+    @DeleteMapping("/clean")
+    public Result delete() {
+        log.info("清空购物车");
+        shoppingCartService.deleteAll();
+        return Result.success();
+    }
+
+    @ApiOperation("减少商品数量")
+    @PostMapping("/sub")
+    public Result deleteOne(@RequestBody ShoppingCartDTO shoppingCartDTO) {
+        log.info("减少商品数量：{}", shoppingCartDTO);
+        shoppingCartService.deleteOne(shoppingCartDTO);
+        return Result.success();
+    }
 }
